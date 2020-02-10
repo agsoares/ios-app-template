@@ -16,7 +16,7 @@ pods:
 xcodegen: swiftgen
 	mint run xcodegen
 
-bootstrap: mint swiftgen xcodegen pods
+bootstrap: swiftgen xcodegen pods
 
 NAME= AppName
 rename:
