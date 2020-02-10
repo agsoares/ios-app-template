@@ -18,7 +18,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mint-
       - name: Mint
-        run: make mint
+        run: MINT_PATH=$(pwd)/mint | make mint
       - name: Bootstrap
         run: make bootstrap
       - name: Build and Test
