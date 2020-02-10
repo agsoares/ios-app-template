@@ -18,6 +18,13 @@ jobs:
           path: /usr/local/lib/mint
           key: ${{ runner.os }}-cache-mint-${{ hashFiles('**/Mintfile') }}
 
+      - name: Cache Pods
+        id: cache-pods
+        uses: actions/cache@v1
+        with:
+          path: Pods
+          key: ${{ runner.os }}-cache-pods-${{ hashFiles('**/Podfile.lock') }}
+
       - name: Bootstrap
         run: make bootstrap
 
