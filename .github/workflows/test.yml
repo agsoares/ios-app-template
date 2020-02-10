@@ -5,11 +5,20 @@ jobs:
     name: Test
     runs-on: macOS-latest
     strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11']
+      matrix:
+        destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Cache Mint
+        uses: actions/cache@v1
+        with:
+          path: mint
+          key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-mint-
+      - name: Mint
+        run: make mint
       - name: Bootstrap
         run: make bootstrap
       - name: Build and Test
