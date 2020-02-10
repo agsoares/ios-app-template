@@ -11,6 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
+      - name: Brew
+        run: make brew
+
       - name: Cache Mint
         id: cache-mint
         uses: actions/cache@v1
@@ -23,7 +26,7 @@ jobs:
         run: make mint
 
       - name: Bootstrap
-        run: make bootstrap
+        run: make ci
 
       - name: Build and Test
         run: |
