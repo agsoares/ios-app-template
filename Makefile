@@ -5,11 +5,9 @@ format:
 swiftgen:
 	mint run swiftgen
 
-brew:
+mint: 
 	brew install mint
 	brew install libxml2
-
-mint: brew
 	mint bootstrap
 
 pods:
@@ -17,8 +15,6 @@ pods:
 
 xcodegen: swiftgen
 	mint run xcodegen
-
-ci: swiftgen xcodegen pods
 
 bootstrap: mint swiftgen xcodegen pods
 

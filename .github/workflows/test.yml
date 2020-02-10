@@ -10,23 +10,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
-      - name: Brew
-        run: make brew
 
       - name: Cache Mint
         id: cache-mint
         uses: actions/cache@v1
         with:
           path: /usr/local/lib/mint
-          key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
-
-      - name: Mint
-        if: steps.cache-mint.outputs.cache-hit != 'true'
-        run: make mint
+          key: ${{ runner.os }}-cache-mint-${{ hashFiles('**/Mintfile') }}
 
       - name: Bootstrap
-        run: make ci
+        run: make bootstrap
 
       - name: Build and Test
         run: |
