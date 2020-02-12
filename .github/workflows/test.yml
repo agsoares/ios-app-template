@@ -21,6 +21,8 @@ jobs:
         with:
           path: /usr/local/lib/mint
           key: ${{ runner.os }}-cache-mint-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-cache-mint
 
       - name: Cache Pods
         id: cache-pods
@@ -28,6 +30,8 @@ jobs:
         with:
           path: Pods
           key: ${{ runner.os }}-cache-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cache-pods
 
       - name: Bootstrap
         run: make bootstrap
