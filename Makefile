@@ -11,7 +11,7 @@ mint:
 	mint bootstrap
 
 pods:
-	bundle install && pod install --repo-update
+	bundle install && bundle exec pod install --repo-update
 
 xcodegen: swiftgen
 	mint run xcodegen
