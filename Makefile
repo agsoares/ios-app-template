@@ -1,22 +1,15 @@
-.PHONY: pods
+.PHONY: tuist
 format:
-	mint run swiftformat swiftformat ./Sources ./Tests
+	swiftformat ./Sources ./Tests
 
-swiftgen:
-	mint run swiftgen
+tuist: 
+	which tuist >/dev/null || (curl -Ls https://install.tuist.io | bash)
+	tuist up
 
-mint: 
-	brew install mint
-	brew install libxml2
-	mint bootstrap
+generate:
+	tuist generate
 
-pods:
-	bundle install && bundle exec pod install --repo-update
-
-xcodegen: swiftgen
-	mint run xcodegen
-
-bootstrap: mint swiftgen xcodegen pods
+bootstrap: tuist generate
 
 NAME= AppName
 rename:
@@ -26,3 +19,4 @@ clean:
 	rm -rf *.xcodeproj 
 	rm -rf *.xcworkspace
 	rm -rf Pods
+	tuist clean || true
